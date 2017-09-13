@@ -27,14 +27,16 @@ class SocialMedia extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		axios.put(`${this.props.url}/social`, this.state.inputs)
-			.then(
-				this.props.setDisplay("summary")
-			)
+			.then(res => {
+				this.props.updateSocial(res.data.facebook, res.data.twitter, res.data.instagram, res.data.youtube, res.data.snapchat);
+                this.props.setDisplay("summary"); 
+			})
 	}
 
 	render() {
         return (
 			<div>
+                <h1>Social Media - Stage 3 of 4</h1>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Facebook:

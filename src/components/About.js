@@ -6,7 +6,7 @@ class About extends Component {
 	    super(props);
 	    this.state = {
 	      inputs: {
-	        sport: "",
+	        sport: "Golf",
 	        team: "",
 	        association: "",
 	        interests:"",
@@ -27,14 +27,19 @@ class About extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		axios.put(`${this.props.url}/about`, this.state.inputs)
-			.then(
-				this.props.setDisplay("social")
-			)
+			.then(res => {
+				if (this.props.edit) {
+                    this.props.setDisplay("summary");
+                } else {
+                    this.props.setDisplay("social");
+                }
+			})
 	}
 
 	render() {
         return (
 			<div>
+                <h1>About - Stage 2 of 4</h1>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Sport:

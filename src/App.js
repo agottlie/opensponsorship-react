@@ -13,7 +13,13 @@ class App extends Component {
     this.state = {
       display: "welcome",
       url: 'http://localhost:8080',
-      currentAthleteId: null
+      currentAthleteId: null,
+      facebook: "",
+      twitter: "",
+      instagram: "",
+      youtube: "",
+      snapchat: "",
+      edit: false
     }
   }
 
@@ -26,6 +32,22 @@ class App extends Component {
   updateAthlete(id) {
     this.setState({
       currentAthleteId: id
+    })
+  }
+
+  updateSocial(fb,tw,ig,yt,sn) {
+    this.setState({
+      facebook: fb,
+      twitter: tw,
+      instagram: ig,
+      youtube: yt,
+      snapchat: sn
+    })
+  }
+
+  setEdit(value) {
+    this.setState({
+      edit: value
     })
   }
 
@@ -43,11 +65,14 @@ class App extends Component {
           setDisplay={this.setDisplay.bind(this)}
           url={this.state.url}
           updateAthlete={this.updateAthlete.bind(this)}
+          edit={this.state.edit}
+          currentAthleteId={this.state.currentAthleteId}
         />
     } else if (this.state.display === "list") {
       displayElement = 
         <List
           setDisplay={this.setDisplay.bind(this)}
+          url={this.state.url}
         />
     } else if (this.state.display === "social") {
       displayElement = 
@@ -55,6 +80,7 @@ class App extends Component {
           setDisplay={this.setDisplay.bind(this)}
           url={this.state.url}
           currentAthleteId={this.state.currentAthleteId}
+          updateSocial={this.updateSocial.bind(this)}
         />
     } else if (this.state.display === "about") {
       displayElement = 
@@ -62,11 +88,20 @@ class App extends Component {
         setDisplay={this.setDisplay.bind(this)}
         url={this.state.url}
         currentAthleteId={this.state.currentAthleteId}
+        edit={this.state.edit}
       />
     } else if (this.state.display === "summary") {
       displayElement = 
       <Summary
         setDisplay={this.setDisplay.bind(this)}
+        url={this.state.url}
+        currentAthleteId={this.state.currentAthleteId}
+        facebook={this.state.facebook}
+        twitter={this.state.twitter}
+        instagram={this.state.instagram}
+        youtube={this.state.youtube}
+        snapchat={this.state.snapchat}
+        setEdit={this.setEdit.bind(this)}
       />
     }
 

@@ -10,7 +10,8 @@ class BasicInfo extends Component {
 	        dateOfBirth: "",
 	        nationality: "",
 	        location:"",
-	        gender: ""
+	        gender: "",
+	        id: this.props.currentAthleteId
 	      }
 	    }
 	}
@@ -25,16 +26,26 @@ class BasicInfo extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		axios.post(`${this.props.url}/basic`, this.state.inputs)
-			.then(res => {
-				this.props.updateAthlete(res.data.id);
-				this.props.setDisplay("about");
-			})
+		if (this.props.edit) {
+			axios.put(`${this.props.url}/basic`, this.state.inputs)
+				.then(res => {
+					this.props.updateAthlete(res.data.id);
+					this.props.setDisplay("summary");
+				})
+		} else {
+			axios.post(`${this.props.url}/basic`, this.state.inputs)
+				.then(res => {
+					this.props.updateAthlete(res.data.id);
+					this.props.setDisplay("about");
+				})
+		}
+
 	}
 
 	render() {
 		return (
 			<div>
+				<h1>Basic Info - Stage 1 of 4</h1>
 				<form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Name:
