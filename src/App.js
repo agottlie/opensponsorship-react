@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       display: "welcome",
-      url: 'http://localhost:8080',
+      url: 'https://open-sponsorship.herokuapp.com',
       currentAthleteId: null,
       facebook: "",
       twitter: "",
